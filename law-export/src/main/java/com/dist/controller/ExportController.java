@@ -44,6 +44,7 @@ public class ExportController extends BaseController {
                 "2、民事起诉状.ftl",
                 "3、授权委托书.ftl",
                 "4、保全申请书.ftl",
+                "5、担保函.ftl",
                 "证据目录.ftl");
         FileUtil.delAllFile(localPath + statisticReport.getFileSaveDir());
         String serverPath = null;
@@ -52,7 +53,10 @@ public class ExportController extends BaseController {
             if (realFileName.startsWith("2、") ||
                     realFileName.startsWith("3、") ||
                     realFileName.startsWith("4、")) {
-                realFileName = realFileName + "-" + String.valueOf(dataMap.get("bgName"));
+                realFileName = realFileName + "-" + dataMap.get("bgName");
+            }
+            if (realFileName.startsWith("5、")) {
+                realFileName = realFileName.substring(2);
             }
             serverPath = statisticReport.createReport(
                     parseMap(templateName, dataMap),
